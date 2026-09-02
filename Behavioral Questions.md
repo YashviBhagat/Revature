@@ -1,3 +1,4 @@
+## Behavioral question answer
 <details>
   <summary><b>1. Can you describe a time when you had to learn something new quickly? How did you approach it?</b></summary>
   <h3>Situation</h3>
@@ -14,4 +15,15 @@
   
 <h3> Conclusion </h3>
 <p>"That experience taught me that when learning something new, going directly to the experts and combining that with self-study is always faster than trying to figure it out alone."</P>
+</details>
+
+<details>
+  <summary><b>2. What are your strengths and weaknesses</b></summary>
+
+  <h3>STRENGTH — Quick Learner/Adaptability:</h3>
+  <p>SMy biggest strength is that I adapt quickly to new things. When I started my thesis I had never worked with RAG systems, vector databases, or materials science — I had to learn all of it from scratch. Within weeks I built a working system that scientists actually used. That ability to pick up new technologies fast and apply them to real problems is something I've proven consistently across my projects.</p>
+
+  <h3>WEAKNESS — Reframe "emotional and trusting" professionally</h3>
+  <p>My weakness is that I can be overly trusting — I sometimes assume everyone on the team is aligned and moving forward, so I don't check in as often as I should. I've learned that regular communication and confirming understanding explicitly is important, especially in team settings. I'm actively working on following up more consistently rather than assuming everything is on track</p>
+
 </details>
