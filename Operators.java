@@ -1,4 +1,5 @@
-/*Declare two integer variables a = 20 and b = 10.
+/* Challenge – operators 
+Declare two integer variables a = 20 and b = 10.
 Perform the following operations:
 Add, subtract, multiply, and divide a and b
 Compare if a is greater than b and store the result in a boolean variable
