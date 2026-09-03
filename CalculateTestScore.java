@@ -77,10 +77,9 @@ public class CalculateTestScore {
             }
             else{
                 System.out.println(score[i] + " - D");
-                }
-
-        
-            }
+                } 
+           }
+        sc.close();
     }
     
 }
