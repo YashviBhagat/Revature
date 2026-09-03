@@ -25,10 +25,11 @@
 
 public class Main{
     public static void main(String[] args) {
-        byte b = 127;
-        int a  = 2555;
-        b = (byte) a; 
-        System.out.println(b);
-        
+        int sum = 0;
+        for(int i=0;i <=5; i++ ){
+            sum = sum + i;
+            
+            System.out.println(sum);
+        }
     }
 }
