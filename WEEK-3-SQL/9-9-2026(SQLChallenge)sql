@@ -1,0 +1,78 @@
+/* Get all fields and records from customer*/
+
+SELECT * FROM customer;
+
+/* Get all fields from customer, but only if they are from Arizona */
+SELECT * FROM customer WHERE state = 'AZ';
+
+/* Get all invoices older than 6 months */
+SELECT * FROM invoice WHERE invoice_date < CURRENT_DATE - INTERVAL '6 months';
+
+/*. Update all customer phone numbers to NULL if they don’t follow this format: ‘+1 555 555-5555’ */
+UPDATE customer SET phone = NULL
+WHERE phone !~ '^\+1 \d{3} \d{3}-\d{4}$';
+
+SELECT * FROM customer;
+
+/* Get all tracks that are longer than 180000 milliseconds */
+SELECT * FROM track where milliseconds > 180000;
+
+/* Update all customers not in the USA so that their country=USA and address, city, & state are NULL */
+UPDATE customer SET 
+country = 'USA',
+address = NULL,
+city = NULL,
+state = NULL
+WHERE country != 'USA';
+
+SELECT * FROM customer LIMIT 10;
+
+/* Given a customer_id, return their total spending across all invoices using a function */
+CREATE OR REPLACE FUNCTION total_spending(cust_id INT)
+RETURNS NUMERIC
+AS $$ 
+    SELECT SUM(total) from invoice where customer_id = cust_id;
+$$ LANGUAGE SQL;
+SELECT total_spending(4);
+
+
+/* Given an employee_id + new_manager_id, create a stored procedure to update an Employee’s ReportsTo field.
+Prevent an employee reporting to themselves, reporting to a non-existence employee, or creating a circular management relationship
+ */
+CREATE OR REPLACE PROCEDURE update_manager(emp_id INT, new_manager_id INT)
+LANGUAGE SQL
+AS $$
+    UPDATE employee 
+    SET reports_to = new_manager_id
+    WHERE employee_id = emp_id;
+$$;
+
+CALL update_manager(5, 2);
+
+ /* schema: pets
+Create two related tables: Customer + Pets
+Demonstrate populating records into these tables
+ */
+
+ CREATE SCHEMA IF NOT EXISTS pets;
+
+ CREATE TABLE IF NOT EXISTS pets.customers(
+    cus_id INT PRIMARY KEY,
+    cus_name VARCHAR(20),
+    cus_phone VARCHAR(20)
+ );
+CREATE TABLE IF NOT EXISTS pets.pet(
+    pet_id INT PRIMARY KEY,
+    cus_id INT REFERENCES pets.customers(cus_id),
+    pet_name VARCHAR(20),
+    pet_breeds VARCHAR(20),
+    price INT
+);
+
+INSERT INTO pets.customers VALUES (1, 'Max', '+1 657 788-8934');
+INSERT INTO pets.customers VALUES (2, 'Belly', '+1 657 788-8934');
+INSERT INTO pets.customers VALUES (3, 'Kevin', '+1 797 738-2934');
+
+INSERT INTO pets.pet VALUES  (1,2,'Dog','Labrador Retriever',900);
+INSERT INTO pets.pet VALUES (2,1,'Dog',' Dachshund',1200);
+SELECT * FROM pets.customers;
