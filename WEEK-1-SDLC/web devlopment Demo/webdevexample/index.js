@@ -1,15 +1,44 @@
-let btn = document.querySelector("#btn");
+// let btn = document.querySelector("#btn");
 
-let p = document.querySelector("#joke");
+// let p = document.querySelector("#joke");
 
-btn.addEventListener("click", handleIt);
+// btn.addEventListener("click", handleIt);
 
-async function handleIt() {
+// async function handleIt() {
     
-    // https://api.chucknorris.io/jokes/random?category={category}
-    let response = await fetch("https://api.chucknorris.io/jokes/random?category=dev")
-    let parsedResponse = await response.json();
+//     // https://api.chucknorris.io/jokes/random?category={category}
+//     let response = await fetch("https://api.chucknorris.io/jokes/random?category=dev")
+//     let parsedResponse = await response.json();
 
-    p.innerHTML = parsedResponse.value;
+//     p.innerHTML = parsedResponse.value;
+
+// }
+
+let form = document.querySelector('#form');
+form.addEventListener('submit',searchForPokemon)
+async function searchForPokemon(e){
+    e.preventDefault();
+
+    let name = document.querySelector('#pokemonName').value;
+ 
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    let parsedResponse = await response.json();
+    console.log(parsedResponse);
+
+    let body = document.querySelector('body');
+    let sprite = document.createElement('img');
+    sprite.src = parsedResponse.sprites.front_default;
+    
+    body.appendChild(sprite)
+
+    let moveSet= document.createElement('div');
+    moveSet.classList.add('moveSet');
+    for(let i = 0;i<parsedResponse.moves.length;i++){
+        let span = document.createElement('span');
+        span.textContent = parsedResponse.moves[i].move.name;
+        moveSet.appendChild(span);
+
+    }
+    body.appendChild(moveSet);
 
 }

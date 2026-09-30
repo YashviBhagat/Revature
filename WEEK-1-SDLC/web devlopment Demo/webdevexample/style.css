@@ -16,3 +16,18 @@
 #header > img {
     width:100px;
 }
+
+.moveSet{
+    display: flex;
+    flex-direction: column;
+   
+}
+.moveSet span{
+    margin: 10px 0px;
+    background-color: rgb(103, 135, 177);
+    color: aliceblue;
+    padding: 5px;
+    max-width: 100px;
+    border-radius: 10px;
+    text-align: center;
+}

@@ -1,0 +1,77 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400&family=Poppins:wght@500;600&display=swap');
+
+:root {
+    --font-main: 'Bitter', serif;       /* text font */
+    --font-heading: 'Poppins', sans-serif; /* heading font */
+
+    --color-bg: #2D384E;
+    --color-text: #FFFFFF;
+    --color-primary: #A5DEF1;   /* heading color */
+    --color-secondary: #3B7B9A; /* buttons and borders */
+    --color-accents: #70AFCE;   /* links and accents */
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+}
+
+.nav-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--color-accents);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 40%;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.logo:hover {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.heading h1 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+}
