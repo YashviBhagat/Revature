@@ -3,3 +3,7 @@ bankcli/
 yashvii_accessKeys.csv
 *.csv
 
+BankOfCLI-Frontend/
+*.log
+*.log.gz
+logs/

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
+import java.util.Objects;
+
 import com.spring.demo.domain.Student;
 import com.spring.demo.dto.StudentWriteDto;
-import com.spring.demo.domain.School;
+//import com.spring.demo.domain.School;
 import com.spring.demo.service.StudentService;
 
 import jakarta.validation.Valid;
@@ -51,9 +53,9 @@ public class StudentController {
 
     
     @PostMapping 
-    public ResponseEntity<Student> insertStudent(@Valid @RequestBody StudentWriteDto student){
+    public ResponseEntity<Student> insertStudent(@Valid @RequestBody StudentWriteDto dto){
 
-        Student savedStudent = studentService.insertStudent(student);
+        Student savedStudent = studentService.insertStudent(dto);
 
 
         //localhost:808/api/students/{id}
@@ -62,7 +64,7 @@ public class StudentController {
                 ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/{id}")
-                    .buildAndExpand(savedStudent.getId())
+                    .buildAndExpand(Objects.requireNonNull(savedStudent.getId()))
                     .toUri()
             )
             .body(savedStudent);
@@ -110,7 +112,7 @@ public class StudentController {
         return studentService.updateStudent(id, student);
     }
 
-    @GetMapping
+    @GetMapping(params = "schoolName")
     public List<Student> getStudentBySchoolName(@RequestParam  String school){
         return studentService.findStudentBySchoolNAme(school);
     }

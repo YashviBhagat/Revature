@@ -8,8 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 public class StudentWriteDto {
     //when converting between java and json 
     //we can make request as 'student_id' instead of studentID
-    @JsonProperty("school_id")
-    private Integer schoolId;
+  
 
 
     @JsonProperty("first_name")
@@ -22,6 +21,9 @@ public class StudentWriteDto {
     @NotBlank
     @Email
     private String email;
+
+    @JsonProperty("school_id")
+    private Integer schoolId;
 
     public Integer getSchoolId() {
         return schoolId;
