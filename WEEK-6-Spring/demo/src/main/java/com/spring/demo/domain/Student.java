@@ -5,7 +5,7 @@ import java.util.List;
 
 //import org.hibernate.annotations.ManyToAny;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,7 +38,7 @@ public class Student {
 
     @ManyToOne 
     @JoinColumn (name="school_id")
-    @JsonIgnore
+    
     private School school;
 
     @OneToMany (

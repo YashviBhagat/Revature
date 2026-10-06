@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.spring.demo.domain.Student;
+import org.springframework.data.domain.Pageable;
+
 import com.spring.demo.dto.StudentWriteDto;
 //import com.spring.demo.domain.School;
 import com.spring.demo.service.StudentService;
@@ -41,15 +43,11 @@ public class StudentController {
     */
 
     //GET localhost:8080/api/students/test
+     // GET localhost:8080/api/students
     @GetMapping
-    public List<Student> getAllStudents(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int count,
-        @RequestParam(defaultValue = "true") boolean asc
-    ){
-        
-        return studentService.getAllStudents(page,count,asc);
-    } 
+    public List<Student> getAllStudents(Pageable pageable) {
+        return studentService.getAllStudents(pageable);
+    }
 
     
     @PostMapping 
@@ -108,11 +106,11 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable int id, @RequestBody Student student){
+    public Student updateStudent(@PathVariable int id, @Valid @RequestBody Student student){
         return studentService.updateStudent(id, student);
     }
 
-    @GetMapping(params = "schoolName")
+    @GetMapping(params = "name")
     public List<Student> getStudentBySchoolName(@RequestParam  String school){
         return studentService.findStudentBySchoolNAme(school);
     }

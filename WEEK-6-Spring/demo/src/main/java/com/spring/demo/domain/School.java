@@ -3,6 +3,8 @@ package com.spring.demo.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,7 +23,7 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size
+    @Size(max=20)
     @NotBlank
     @Column (name = "name",length = 20,nullable=false)
     private String name;
@@ -30,6 +32,7 @@ public class School {
         mappedBy = "school",
         fetch = FetchType.LAZY
     )
+    @JsonIgnore 
     private List<Student> students = new ArrayList<>();
 
     public School(){}

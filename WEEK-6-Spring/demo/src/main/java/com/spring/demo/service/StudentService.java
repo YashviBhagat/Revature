@@ -60,32 +60,21 @@ public class StudentService {
         return studentRepo.save(newStudent);
     }
 
-    @Transactional 
-    public School insertSchool(School school){
-        return schoolRepo.save(school);
-    }
+    // @Transactional 
+    // public School insertSchool(School school){
+    //     return schoolRepo.save(school);
+    // }
 
     @Transactional 
     public List<Student> findStudentBySchoolNAme(String name){
         return studentRepo.findBySchool_Name(name);
     }
 
-    @Transactional(readOnly = true)
-    public List<Student> getAllStudents(int page,int count,boolean asc){
+   @Transactional(readOnly = true)
+    public List<Student> getAllStudents(Pageable pageable) {
+        return studentRepo.findAll(pageable).getContent();
+}
 
-        Sort.Direction direction = asc?
-        Sort.Direction.ASC
-        :Sort.Direction.DESC;
-
-        Pageable pageable = PageRequest.of(
-            page,
-            count,
-            Sort.by(direction,"id")
-    );
-    Page<Student> students = studentRepo.findAll(pageable);
-
-        return students.getContent();
-    }
 
     @Transactional (readOnly = true)
     public Student getStudentById(int id){
@@ -128,18 +117,18 @@ public class StudentService {
 
     }
 
-    @Transactional(readOnly = true) 
-    public School getSchoolById(int id){
-        School school = schoolRepo.findById(id)
-        .orElseThrow(()->
-            new RecordNotFoundException(
-                "School not found with id:" + id
-            )
-        );
+    // @Transactional(readOnly = true) 
+    // public School getSchoolById(int id){
+    //     School school = schoolRepo.findById(id)
+    //     .orElseThrow(()->
+    //         new RecordNotFoundException(
+    //             "School not found with id:" + id
+    //         )
+    //     );
 
         
-        return school;
-    }
+    //     return school;
+    // }
 
 
     
