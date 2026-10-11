@@ -5,7 +5,7 @@ import java.util.List;
 
 //import org.hibernate.annotations.ManyToAny;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,6 +46,7 @@ public class Student {
         orphanRemoval = true,
         cascade = CascadeType.ALL
     )
+    @JsonIgnore 
     private List<Enrollment> enrollments = new ArrayList<>(); 
 
     @Size(max=20)

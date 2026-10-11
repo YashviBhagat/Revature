@@ -36,5 +36,10 @@ public class SchoolService {
         return schoolRepo.save(school);
     }
 
+    @Transactional (readOnly = true)
+    public List<School> getSchoolByName(String name){
+        return schoolRepo.searchByName(name);
+    }
+
 
 }

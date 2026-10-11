@@ -2,6 +2,8 @@ package com.spring.demo.rest;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Objects;
 
+import com.spring.demo.domain.Enrollment;
 import com.spring.demo.domain.Student;
 import org.springframework.data.domain.Pageable;
 
+import com.spring.demo.dto.EnrollmentResponseDto;
+import com.spring.demo.dto.EnrollmentWriteDto;
 import com.spring.demo.dto.StudentWriteDto;
 //import com.spring.demo.domain.School;
 import com.spring.demo.service.StudentService;
@@ -111,9 +116,19 @@ public class StudentController {
     }
 
     @GetMapping(params = "name")
-    public List<Student> getStudentBySchoolName(@RequestParam  String school){
+public List<Student> getStudentBySchoolName(@RequestParam String school)
+{
         return studentService.findStudentBySchoolNAme(school);
     }
+    
+    @PostMapping("/{id}/enrollments")
+    public ResponseEntity<EnrollmentResponseDto> enrollStudent(
+        @PathVariable int id,
+        @Valid @RequestBody EnrollmentWriteDto dto){
+            EnrollmentResponseDto enrollment = studentService.enrollStudent(id, dto);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(enrollment);
+        }
     
     
     

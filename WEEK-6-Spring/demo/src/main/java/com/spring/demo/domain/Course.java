@@ -3,6 +3,8 @@ package com.spring.demo.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +33,7 @@ public class Course {
         orphanRemoval = true,
         cascade = CascadeType.ALL
     )
+    @JsonIgnore 
     private List<Enrollment> enrollments = new ArrayList<>();
 
     public Course() {}

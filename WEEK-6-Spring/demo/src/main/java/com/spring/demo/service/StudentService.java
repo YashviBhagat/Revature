@@ -1,5 +1,6 @@
 package com.spring.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,8 +17,12 @@ import com.spring.demo.dao.EnrollmentRepository;
 import com.spring.demo.dao.SchoolRepository;
 //import com.spring.demo.dao.StudentDAO;
 import com.spring.demo.dao.StudentRepository;
+import com.spring.demo.domain.Course;
+import com.spring.demo.domain.Enrollment;
 import com.spring.demo.domain.School;
 import com.spring.demo.domain.Student;
+import com.spring.demo.dto.EnrollmentResponseDto;
+import com.spring.demo.dto.EnrollmentWriteDto;
 import com.spring.demo.dto.StudentWriteDto;
 import com.spring.demo.exceptions.RecordNotFoundException;
 
@@ -117,18 +122,25 @@ public class StudentService {
 
     }
 
-    // @Transactional(readOnly = true) 
-    // public School getSchoolById(int id){
-    //     School school = schoolRepo.findById(id)
-    //     .orElseThrow(()->
-    //         new RecordNotFoundException(
-    //             "School not found with id:" + id
-    //         )
-    //     );
+    @Transactional 
+    public EnrollmentResponseDto enrollStudent(int studentId,EnrollmentWriteDto dto){
+        Student student = getStudentById(studentId); //thows 404 error if not found
 
-        
-    //     return school;
-    // }
+        Course course = courseRepo.findById(dto.getCourseId())
+        .orElseThrow(() ->
+        new RecordNotFoundException("Course not found with id: " + dto.getCourseId())
+    );
+    Enrollment enrollment = new Enrollment(
+        student,
+        LocalDate.now(),
+        dto.getGrade(),
+        course
+    );
+    Enrollment saved = enrollmentRepo.save(enrollment);
+    return new EnrollmentResponseDto(saved);
+    }
+    
+
 
 
     
