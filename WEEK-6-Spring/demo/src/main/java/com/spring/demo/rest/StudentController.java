@@ -25,10 +25,15 @@ import com.spring.demo.dto.StudentWriteDto;
 //import com.spring.demo.domain.School;
 import com.spring.demo.service.StudentService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+@Tag(name = "Students", description = "Manage students")
 
 @RestController 
 @RequestMapping ("/api/students")
@@ -94,8 +99,12 @@ public class StudentController {
 
     //query parameter - typically filtering and searching
     //GET http://localhost:8080/api/students?lastname=bhagat&grade=b
+    @Operation(summary = "Get a student by id", description = "Returns one student.")
+    @ApiResponse(responseCode = "200", description = "Student found")
+    @ApiResponse(responseCode = "404", description = "Student not found")
+
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable int id){
+    public Student getStudentById(@Parameter(description = "Id of the student", example = "4")@PathVariable int id){
         return studentService.getStudentById(id);
     }
 
